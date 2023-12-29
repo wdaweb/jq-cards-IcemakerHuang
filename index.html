@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card {
+            width: 100px;
+            height: 180px;
+            position: relative;
+            float: left;
+
+
+            margin: 10px;
+            /* 設定子元素在3D的空間內 */
+            transform-style: preserve-3d;
+            transition: transform 1s;
+        }
+
+        .card-front {
+            width: 100px;
+            height: 140px;
+            background-image: url(./cards/1H.jpg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            /* 隱藏背面 */
+            backface-visibility: hidden;
+        }
+
+        .card-back {
+            width: 100px;
+            height: 140px;
+            background-image: url(./cards/Red_back.jpg);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: absolute;
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
+        }
+
+        .card-close {
+            transform: rotateY(180deg);
+        }
+
+        /* 遊戲場景 */
+        body {
+            margin: 0;
+            padding: 0;
+            position: relative;
+
+            background-image: url(./images/bg-images.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            overflow: hidden;
+        }
+
+        /* #display {
+            width: 100%;
+            height: 50vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #c3b4b4;
+        } */
+
+        /* #game {
+            width: 100%;
+            height: 50vh;
+            position: absolute;
+            top: calc(100vh - 50vh);
+            left: 0;
+            background: #000;
+        } */
+
+        #game {
+            margin-top: 3rem;
+            width: 800px;
+            height: 100%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .card-img {
+            width: 220px;
+            height: 320px;
+            /* background: #000; */
+
+            position: fixed;
+            top: 10%;
+            left: 5%;
+            z-index: 10;
+        }
+
+        .card-img img {
+            width: 220px;
+            height: 320px;
+            object-fit: cover;
+        }
+
+        .text {
+            width: 350px;
+            height: 200px;
+            /* background: #000; */
+            color: white;
+            font-size: 16px;
+            position: fixed;
+            top: 15%;
+            right: 5%;
+            z-index: 10;
+        }
+
+        .fade-in-out {
+            transition: opacity 3s ease-in-out;
+            opacity: 0;
+            display: none;
+        }
+
+        .active {
+            opacity: 1;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="card">
+        <div class="card-front"></div>
+        <div class="card-back"></div>
+    </div> -->
+
+    <!-- <div id="display"></div> -->
+    <!-- 遊戲區域 -->
+    <div id="game">
+    </div>
+    <div class="card-img"><img src="./images/2H.png"></div>
+    <div class="text">
+        <div class="1H fade-in-out">
+            <h1>【名稱】達拉然火焰</h1>
+            <p>【取得方式】<br>
+                卡背獎勵將發放給TeSPA本地協會的活耀會員。<br>
+                可獲得卡背的本地協會需要至少25位成員。<br>
+                達到卡背領取資格的成員可在“My TeSPA”界面查看。</p>
+        </div>
+        <div class="2H fade-in-out">
+            <h1>【名稱】經典</h1>
+            <p>【取得方式】<br>
+                開始遊戲便會贈送的基本卡背。</p>
+        </div>
+        <div class="3H fade-in-out">
+            <h1>【名稱】爐邊聚會</h1>
+            <p>【取得方式】<br>
+                參加「爐邊聚會」活動 / 在相同子網域中與玩家對戰。</p>
+        </div>
+        <div class="4H fade-in-out">
+            <h1>【名稱】霸主</h1>
+            <p>【取得方式】<br>
+                購買『台版魔獸世界德拉諾之霸典藏板』贈品。</p>
+        </div>
+        <div class="5H fade-in-out">
+            <h1>【名稱】奈法利安</h1>
+            <p>【取得方式】<br>
+                在 《勇闖黑石山》：英雄難度『中』全部通關。</p>
+        </div>
+        <div class="6H fade-in-out">
+            <h1>【名稱】傳說</h1>
+            <p>【取得方式】<br>
+                當你第一次在排名模式中達到傳說位階(任何一個賽季都可)。</p>
+        </div>
+        <div class="7H fade-in-out">
+            <h1>【名稱】潘達利亞</h1>
+            <p>【取得方式】<br>
+                在第一季(2014/04)取得排名R20以上。</p>
+        </div>
+        <div class="8H fade-in-out">
+            <h1>【名稱】黑暗神廟</h1>
+            <p>【取得方式】<br>
+                在第二季(2014/05)取得排名R20以上。</p>
+        </div>
+        <div class="9H fade-in-out">
+            <h1>【名稱】彩虹！</h1>
+            <p>【取得方式】<br>
+                在第三季(2014/06)取得排名R20以上。</p>
+        </div>
+        <div class="10H fade-in-out">
+            <h1>【名稱】納克薩瑪斯</h1>
+            <p>【取得方式】<br>
+                在第四季(2014/07)取得排名R20以上。</p>
+        </div>
+        <div class="11H fade-in-out">
+            <h1>【名稱】寒冰王冠</h1>
+            <p>【取得方式】<br>
+                在第五季(2014/08)取得排名R20以上。</p>
+        </div>
+        <div class="12H fade-in-out">
+            <h1>【名稱】海盜！</h1>
+            <p>【取得方式】<br>
+                在第六季(2014/09)取得排名R20以上。</p>
+        </div>
+    </div>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'
+        integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='
+        crossorigin='anonymous'></script>
+    <script>
+        //產生24張卡片
+        for (let i = 0; i < 24; i++) {
+            $('#game').append(`
+                <div class="card card-close">
+                    <div class="card-front"></div>
+                    <div class="card-back"></div>
+                </div>
+            `)
+        }
+
+        //決定每張數字
+        //用餘數算出兩組
+        $('.card').each(function (index) {
+            const number = index % 12 + 1
+            console.log(index, number)
+            $(this).find('.card-front').css('background-image', `url(./images/${number}H.png`)
+            $(this).attr('data-number', number)
+
+            // const randomNumber = Math.floor(Math.random() * 5) + 1;
+            // $(this).find('.card-back').css('background-image', `url(./images/${randomNumber}H.png`)
+            $(this).find('.card-back').css('background-image', `url(./images/2H.png`)
+        })
+
+        //打亂
+        for (let i = 0; i < 20; i++) {
+            const randomA = Math.round(Math.random() * 23)
+            const randomB = Math.round(Math.random() * 23)
+            // 把隨機的東西搬到第二個隨機的後面
+            $('.card').eq(randomA).insertAfter($('.card').eq(randomB))
+        }
+
+        //翻牌
+        $('#game').on('click', '.card', function () {
+            if (
+                $('.card:not(.card-close)').length < 2 &&
+                $(this).hasClass('card-close') &&
+                !$(this).hasClass('card-ok')
+            ) {
+                $(this).removeClass('card-close');
+            }
+
+            if ($('.card:not(.card-close)').length === 2) {
+                if (
+                    $('.card:not(.card-close)').eq(0).attr('data-number') ===
+                    $('.card:not(.card-close)').eq(1).attr('data-number')
+                ) {
+                    $('.card:not(.card-close)').addClass('card-ok');
+                    $('.card:not(.card-close)').fadeTo(1000, 0);
+
+                    // 獲取成功配對的圖片URL
+                    var matchedImage = $('.card:not(.card-close)').eq(0).find('.card-front').css('background-image');
+
+                    // 更新.card-img的圖片
+                    $('.card-img img').attr('src', matchedImage.slice(5, -2));
+
+                    // 取得配對成功的卡片編號
+                    var number = $('.card:not(.card-close)').eq(0).attr('data-number');
+
+                    // 隱藏所有的描述
+                    $('.text > div').removeClass('active').addClass('fade-in-out');
+
+                    // 顯示匹配的描述
+                    $('.text .' + number + 'H').addClass('active');
+
+                }
+
+                setTimeout(function () {
+                    $('.card:not(.card-close)').addClass('card-close');
+                    if ($('.card-ok').length === $('.card').length) {
+                        alert('過關');
+                    }
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+
+</html>
